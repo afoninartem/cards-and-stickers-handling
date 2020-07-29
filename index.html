@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Отгрузка визиток и наклеек</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <form action="" class="upload">
-    <label for="list">Загрузить список заказов в формате CSV:</label>
-    <input type="file" name="full-list" id="list">
-  </form>
-  <form action="" class="upload">
-    <label for="list">Загрузить актуальный список салонов в формате CSV:</label>
-    <input type="file" name="full-list" id="shops">
-  </form>
-  <button type="button" id="download">Скачать</button>
+  <div class="wrapper">
+    <form action="" class="upload">
+      <label for="shops">Загрузить актуальный список салонов в формате CSV:</label>
+      <input type="file" name="full-list" id="shops" required>
+      <label for="list">Загрузить список заказов в формате CSV:</label>
+      <input type="file" name="full-list" id="list" required>
+      <button type="submit" class="button" id="download">Скачать CSV</button>
+    </form>
+    <div class="print-block">
+      <div class="title">Салоны</div>
+      <div class="title">Визитки</div>
+      <div class="title">Наклейки</div>
+    </div>
+    <button type="button" class="button hidden__button" onclick="printTable()">Печать</button>
+  </div>
   <script src="js.js"></script>
 </body>
+
 </html>
