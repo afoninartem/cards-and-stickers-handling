@@ -1,14 +1,6 @@
 const list = [];
-const shops = [];
+const shops = JSON.parse(localStorage.getItem('lastShopsInfo')) || [];
 let cardSum = 0, stickerSum = 0;
-
-const printTable = () => {
-  const originBody = document.body.innerHTML;
-  const tableToPrint = document.querySelector('.print-block').innerHTML;
-  document.body.innerHTML = tableToPrint;
-  window.print();
-  document.body.innerHTML = originBody;
-}
 
 const createPreview = () => {
   const printBlock = document.querySelector('.print-block');
@@ -48,7 +40,6 @@ const createPreview = () => {
 const checkShopName = (name) => {
   const namePart = name.match(/_.+/g);
   shops.forEach((elem, i) => {
-    // console.log(elem)
     if (elem.includes(namePart)) name = shops[i];
   });
   return name;
@@ -63,6 +54,32 @@ const checkData = (row) => {
   }
 }
 
+const whatDayIsItToday = () => {
+  const date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  if (day < 10) day = '0' + day;
+  if (month < 10) month = '0' + month;
+  return `${day}.${month}.${year}`;
+}
+
+const updateInfo = () => {
+  localStorage.setItem(`fullDate`, JSON.stringify(whatDayIsItToday()));
+  return whatDayIsItToday();
+}
+
+const getLastInfo = () => {
+  const last = JSON.parse(localStorage.getItem('fullDate'));
+  return last;
+}
+
+const outputInfo = (correctDate) => {
+  document.querySelector('.last-info').textContent = `Последняя загрузка актуальных названий салонов производилась ${correctDate}.`
+}
+
+outputInfo(getLastInfo());
+
 document.getElementById('shops').onchange = function () {
   let file = this.files[0];
   let reader = new FileReader();
@@ -72,6 +89,9 @@ document.getElementById('shops').onchange = function () {
       salon = salon.split(';');
       if (salon[0].includes('_')) shops.push(salon[0]);
     });
+    localStorage.setItem(`lastShopsInfo`, JSON.stringify(shops));
+    // const update = updateInfo();
+    outputInfo(updateInfo());
   }
   reader.readAsText(file, 'windows-1251');
 }
@@ -106,3 +126,4 @@ document.querySelector('#download').onclick = function () {
     hiddenElement.click();
   }
 }
+

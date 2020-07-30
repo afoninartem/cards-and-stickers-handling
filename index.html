@@ -13,7 +13,8 @@
 <body>
   <div class="wrapper">
     <form action="" class="upload">
-      <label for="shops">Загрузить актуальный список салонов в формате CSV:</label>
+      <p class="last-info"></p>
+      <label for="shops">Если прошло больше двух недель, рекомендуется загрузить актуальный список салонов в формате CSV:</label>
       <input type="file" name="full-list" id="shops" required>
       <label for="list">Загрузить список заказов в формате CSV:</label>
       <input type="file" name="full-list" id="list" required>
@@ -24,8 +25,8 @@
       <div class="title">Визитки</div>
       <div class="title">Наклейки</div>
     </div>
-    <button type="button" class="button hidden__button" onclick="printTable()">Печать</button>
-  </div>
+      <button type="button" class="button hidden__button" onclick="window.print()">Печать</button>
+  
   <script src="js.js"></script>
 </body>
 
